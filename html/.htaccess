@@ -1,0 +1,23 @@
+<IfModule mod_rewrite.c>
+
+    RewriteEngine On
+
+    RewriteCond %{HTTP_HOST} ^www\.fairnesstest\.com [NC]
+    RewriteRule ^(.*)$ http://fairnesstest.com/$1 [L,R=301]
+
+    # allow social media crawlers to work by redirecting them to a server-rendered static version on the page
+    RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} !^share.php
+    RewriteRule (.*) share.php?url=%{REQUEST_URI}&request=%{THE_REQUEST} [NE]
+
+    # If an existing asset or directory is requested go to it as it is
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-d
+    RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
+    #RewriteRule ^ - [L]
+
+    # If the requested resource doesn't exist, use index.html
+    RewriteRule ^ /index.html
+
+</IfModule>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+		<title>App</title>
+		<link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+	</head>
+	<body ng-app="app" > <!-- class="{{bodyStyle}}" -->
+
+		<section class="wrapper">
+			<ui-view></ui-view>
+		</section>
+
+		<div style="clear: both;"></div>
+
+		<script src="vendor.bundle.js"></script>
+		<script src="bundle.js"></script>
+
+	</body>
+</html>
